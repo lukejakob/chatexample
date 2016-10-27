@@ -2,11 +2,6 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-"scripts": {
-    "start": "node index.js",
-   },
-
-
 app.get('/', function(req, res){
   res.sendfile('index.html');
 });
