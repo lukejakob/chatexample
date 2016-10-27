@@ -1,27 +1,36 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Socket.IO chat</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
-  </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
+<head>
+  <title>Luke's Chat</title>
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font: 13px Helvetica, Arial; }
+  form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+  form input { border: 5px ; padding: 5px; width: 35%; margin-right: .5%; }
+  form button { width: 8%; background: rgb(130, 224, 255); border: none; padding: 9px; }
+  #messages { list-style-type: none; margin: 0; padding: 0; }
+  #messages li { padding: 5px 10px; }
+  #inputUsername {width: 110px}
+  #m {width: 1260px}
+  #messages li:nth-child(odd) { background: #eee; }
+  </style>
+</head>
+<body>
+  <ul id="messages"></ul>
+    <div class="container">
+      <form class="form-signin">
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username"  value="Name">
+        <input id="m" autocomplete="off" / placeholder="Message" value="v" autofocus="" >
+        <button>Send</button>
+        </form>
+      </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
+  <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
   var socket = io();
   $('form').submit(function(){
     socket.emit('chat message', $('#m').val());
@@ -29,8 +38,8 @@
     return false;
   });
   socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+    $('#messages').append($('<li>').text(msg)).append(    $('#inputUsername').val()         )($('</li>'));
   });
-</script>
-  </body>
+  </script>
+</body>
 </html>
