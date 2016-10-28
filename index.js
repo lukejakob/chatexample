@@ -6,6 +6,14 @@ app.get('/', function(req, res){
   res.sendfile('index.html');
 });
 
+app.get('/bootstrap/css/bootstrap.css', function(req, res){
+  res.sendfile('bootstrap/css/bootstrap.css');
+});
+
+app.get('/bootstrap/css/bootstrap-theme.css', function(req, res){
+  res.sendfile('bootstrap/css/bootstrap-theme.css');
+});
+
 io.emit('some event', { for: 'everyone' });
 
 io.on('connection', function(socket){
