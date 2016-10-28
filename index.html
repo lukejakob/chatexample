@@ -13,17 +13,22 @@
   #inputUsername {width: 110px}
   #m {width: 1260px}
   #messages li:nth-child(odd) { background: #eee; }
+  .dieNachricht{}
   </style>
 </head>
 <body>
-  <ul id="messages"></ul>
-    <div class="container">
-      <form class="form-signin">
-        <input type="text" id="inputUsername" class="form-control" placeholder="Username"  value="Name">
-        <input id="m" autocomplete="off" / placeholder="Message" value="v" autofocus="" >
-        <button>Send</button>
-        </form>
-      </div>
+  <div class="container">
+      <ul id="messages"></ul>
+        <div class="row">
+  </div>
+  </div>
+  <div class="container">
+    <form class="form-signin">
+      <input type="text" id="inputUsername" class="form-control" placeholder="Username"  value="Name:">
+      <input id="m" autocomplete="off" / placeholder="Message" value="Hallo" autofocus="" >
+      <button id="absendenKnopf">Send</button>
+    </form>
+  </div>
 
   <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
@@ -31,15 +36,48 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>
+
   var socket = io();
   $('form').submit(function(){
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
+    $('#m').val('');
     return false;
   });
   socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg)).append(    $('#inputUsername').val()         )($('</li>'));
+    var derBenutzername = $('#inputUsername').val()
+    var derName = '<div class="derName">'  + derBenutzername + ':</div>';
+    var dieNachricht = '<div class="dieNachricht">' + msg + '</div>';
+    var chatExample = '<li>' + derName + dieNachricht + '</li>';
+    $('#messages')
+    .append(chatExample)
+
   });
+
+  $("#m").focusin(function(){
+    $('#absendenKnopf').disable(false);
+});
+
+  $(function() {
+    jQuery.fn.extend({
+      disable: function(state) {
+        return this.each(function() {
+          var $this = $(this);
+          if($this.is('input, button'))
+          this.disabled = state;
+          else
+          $this.toggleClass('disabled', state);
+        });
+      }
+    });
+
+    $('#absendenKnopf').disable(true);
+
+    $('body').on('click', 'a.disabled', function(event) {
+      event.preventDefault();
+    });
+  });
+
   </script>
 </body>
 </html>
