@@ -23,13 +23,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <h4 class="modal-title" id="myModalLabel">Dem Chat beitreten:</h4>
           </div>
           <div class="modal-body">
             <input type="text" placeholder="Username" class="form-control" id="modaltext">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Anmelden</button>
+            <button type="button" class="btn btn-primary" id="knopfZumStarten">Go!</button>
           </div>
         </div>
       </div>
@@ -40,11 +40,11 @@
     <div class="container" id="absendbereich">
       <form class="form-horizontal">
         <div class="form-group">
-          <div class="col-sm-1">
-            <input type="text" id="inputUsername" class="form-control" placeholder="Username"  value="Name">
+          <div class="col-sm-0">
+            <input type="hidden" id="inputUsername" class="form-control" placeholder="Username"  value="Name">
           </div>
-          <div class="col-sm-10">
-            <input id="m" autocomplete="off" / placeholder="Message" class="form-control" value="Hallo" autofocus="" >
+          <div class="col-sm-11">
+            <input id="m" autocomplete="off" / placeholder="Message" class="form-control" value="Hallo" >
           </div>
           <div class="col-sm-1">
             <button id="absendenKnopf" class= btn btn-success>Send</button>
@@ -61,6 +61,7 @@
     <script src="bootstrap/js/bootstrap.js"></script>
 
     <script>
+    var username;
 
     var socket = io();
     $('form').submit(function(){
@@ -71,7 +72,7 @@
     });
 
     socket.on('chat message', function(msg){
-      var derBenutzername = $('#inputUsername').val()
+      var derBenutzername = username
       var derName = '<div class="col-sm-1">'  + derBenutzername + ':</div>';
       var dieNachricht = '<div class="col-sm-9">' + msg + '</div>';
       var uhrzeit = new Date();
@@ -82,9 +83,15 @@
 
     });
 
-    $("#m").focusout(function(){
+
+    $("#m").change(function(){
       $('#absendenKnopf').disable(false);
     });
+
+    $("#modaltext").change(function(){
+      $('#knopfZumStarten').disable(false);
+    });
+
 
     $(function() {
       jQuery.fn.extend({
@@ -100,13 +107,21 @@
       });
 
       $('#absendenKnopf').disable(true);
+      $('#knopfZumStarten').disable(true);
 
-      $('body').on('click', 'a.disabled', function(event) {
-        event.preventDefault();
-      });
     });
 
-    $('#myModal').modal()
+    $('body').on('click', 'a.disabled', function(event) {
+      event.preventDefault();
+    });
+
+    $('#myModal').modal();
+
+    $('#knopfZumStarten').on('click',  function() {
+      username = $('#modaltext').val();
+      $('#myModal').modal('hide');
+    });
+
 
     </script>
   </body>
