@@ -10,6 +10,11 @@ app.get('/bootstrap/css/bootstrap.css', function(req, res){
   res.sendfile('bootstrap/css/bootstrap.css');
 });
 
+app.get('/bootstrap/js/bootstrap.js', function(req, res){
+  res.sendfile('bootstrap/js/bootstrap.js');
+});
+
+
 app.get('/bootstrap/css/bootstrap-theme.css', function(req, res){
   res.sendfile('bootstrap/css/bootstrap-theme.css');
 });
