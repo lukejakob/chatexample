@@ -55,7 +55,7 @@
       var derName = '<div class="col-sm-1">'  + derBenutzername + ':</div>';
       var dieNachricht = '<div class="col-sm-9">' + msg + '</div>';
       var uhrzeit = new Date();
-      var dieZeit = '<div class="col-sm-2">' + uhrzeit.getHours() + ':' + uhrzeit.getMinutes() + ':' + uhrzeit.getSeconds() +   '</div>';
+      var dieZeit = '<div class="col-sm-2">' + uhrzeit.getHours() + ':' + uhrzeit.getMinutes() + ':' +  uhrzeit.getSeconds() +   '</div>';
       var chatExample = '<div class="row" >' + derName + dieNachricht + dieZeit + '</div>';
       $('#messages')
       .append(chatExample)
@@ -63,7 +63,7 @@
     });
 
     $("#m").focusin(function(){
-      $('#absendenKnopf').disable(true);
+      $('#absendenKnopf').disable(false);
     });
 
     $(function() {
@@ -78,7 +78,8 @@
           });
         }
       });
-    $('#absendenKnopf').disable(false);
+
+      $('#absendenKnopf').disable(true);
 
       $('body').on('click', 'a.disabled', function(event) {
         event.preventDefault();
