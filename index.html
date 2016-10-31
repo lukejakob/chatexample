@@ -63,7 +63,7 @@
     });
 
     $("#m").focusin(function(){
-      $('#absendenKnopf').disable(false);
+      $('#absendenKnopf').disable(true);
     });
 
     $(function() {
@@ -78,8 +78,7 @@
           });
         }
       });
-
-      $('#absendenKnopf').disable(true);
+    $('#absendenKnopf').disable(false);
 
       $('body').on('click', 'a.disabled', function(event) {
         event.preventDefault();
