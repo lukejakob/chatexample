@@ -71,8 +71,10 @@
     });
 
     socket.on('chat message', function(msg){
-      var meinYouTube = '<iframe width="560" height="315" src="' + msg +'"  frameborder="0" allowfullscreen></iframe>';
-      var derBenutzername = username
+      var matches = msg.match(/\?v\=([0-9a-zA-Z]*)/);
+  var meinYouTube = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+matches[1]+'" frameborder="0" allowfullscreen></iframe>';
+
+      var derBenutzername = username;
       var derName = '<div class="col-sm-1">'  + derBenutzername + ':</div>';
       var dieNachricht = '<div class="col-sm-9">' + meinYouTube + '</div>';
       var uhrzeit = new Date();
@@ -123,8 +125,8 @@
       $('#myModal').modal('hide');
     });
 
-  //   https://www.youtube.com/watch?v=ANTqnmC10VM
-  // <iframe width="560" height="315" src="https://www.youtube.com/embed/ANTqnmC10VM" frameborder="0" allowfullscreen></iframe>
+    //   https://www.youtube.com/watch?v=ANTqnmC10VM
+    // <iframe width="560" height="315" src="https://www.youtube.com/embed/ANTqnmC10VM" frameborder="0" allowfullscreen></iframe>
 
 
     </script>
