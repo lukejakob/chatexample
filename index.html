@@ -44,7 +44,7 @@
             <input type="hidden" id="inputUsername" class="form-control" placeholder="Username"  value="Name">
           </div>
           <div class="col-sm-11">
-            <input id="m" autocomplete="off" / placeholder="Message" class="form-control" value="Hallo" >
+            <input id="m" autocomplete="off" / placeholder="Message" class="form-control" value="" >
           </div>
           <div class="col-sm-1">
             <button id="absendenKnopf" class= btn btn-success>Send</button>
@@ -70,13 +70,18 @@
       return false;
     });
 
+
+
     socket.on('chat message', function(msg){
-      var matches = msg.match(/\?v\=([0-9a-zA-Z]*)/);
-  var meinYouTube = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+matches[1]+'" frameborder="0" allowfullscreen></iframe>';
+      var matches = msg.match(/\?v\=([0-9a-zA-Z_]*)/);
+      var meinYouTube = '';
+      if ( matches!=null) {
+        meinYouTube = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+matches[1]+'" frameborder="0" allowfullscreen></iframe>';
+      }
 
       var derBenutzername = username;
       var derName = '<div class="col-sm-1">'  + derBenutzername + ':</div>';
-      var dieNachricht = '<div class="col-sm-9">' + meinYouTube + '</div>';
+      var dieNachricht = '<div class="col-sm-9">' + msg + ' ' + meinYouTube + '</div>';
       var uhrzeit = new Date();
       var dieZeit = '<div class="col-sm-2">' + uhrzeit.getHours() + ':' + uhrzeit.getMinutes() + ':' +  uhrzeit.getSeconds() +   '</div>';
       var chatExample = '<div class="row" >' + derName + dieNachricht + dieZeit + '</div>';
